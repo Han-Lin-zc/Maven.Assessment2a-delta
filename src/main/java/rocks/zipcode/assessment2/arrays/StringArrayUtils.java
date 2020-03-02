@@ -1,6 +1,5 @@
 package rocks.zipcode.assessment2.arrays;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
