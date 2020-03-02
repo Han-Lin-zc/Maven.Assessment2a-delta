@@ -61,7 +61,7 @@ public class StringUtils {
      */
     public static Boolean isSpecialCharacterString(String string) {
         for (char ch : string.toCharArray()) {
-            if (Character.isLetterOrDigit(ch)) return true;
+            if (!Character.isLetterOrDigit(ch)) return true;
         }
         return false;
     }
