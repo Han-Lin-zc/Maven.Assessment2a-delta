@@ -1,5 +1,8 @@
 package rocks.zipcode.assessment2.fundamentals;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author leon on 28/11/2018.
  */
@@ -37,7 +40,9 @@ public class StringUtils {
      */
     public static Boolean isAlphaString(String string) {
         for (char ch : string.toCharArray()) {
-            if (Character.isAlphabetic(ch)) {
+            if (Character.isDigit(ch)) {
+                return false;
+            } else if (Character.isLetter(ch)) {
                 return true;
             }
         }
@@ -49,10 +54,13 @@ public class StringUtils {
      * @return - true if string only contains numeric characters
      */
     public static Boolean isNumericString(String string) {
-        for (char ch : string.toCharArray()) {
-            if (Character.isDigit(ch)) return true;
+
+        try {
+            Double.parseDouble(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -60,9 +68,8 @@ public class StringUtils {
      * @return - true if string only contains special characters
      */
     public static Boolean isSpecialCharacterString(String string) {
-        for (char ch : string.toCharArray()) {
-            if (!Character.isLetterOrDigit(ch)) return true;
-        }
-        return false;
+        String splChrs = "-/@#$%^&_+=()" ;
+        return string.matches(" [" + splChrs + "]+");
+
     }
 }
