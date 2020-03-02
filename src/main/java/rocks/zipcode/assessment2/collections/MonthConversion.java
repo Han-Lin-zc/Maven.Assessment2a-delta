@@ -1,15 +1,24 @@
 package rocks.zipcode.assessment2.collections;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Use a map to solve
  */
 public class MonthConversion {
+
+    Map<Integer, String> month;
+
+    public MonthConversion() {
+        this.month = new HashMap<>();
+    }
     /**
      * @param monthNumber - ordinal of month in the year; i.e. January = 1, February = 2
      * @param monthName - name of month
      */
     public void add(Integer monthNumber, String monthName) {
-
+        month.put(monthNumber,monthName);
     }
 
     /**
@@ -17,7 +26,7 @@ public class MonthConversion {
      * @return the name of the respective month
      */
     public String getName(Integer monthNumber) {
-        throw new NullPointerException();
+        return month.get(monthNumber);
     }
 
     /**
@@ -25,7 +34,13 @@ public class MonthConversion {
      * @return - the ordinal of the month in the year
      */
     public int getNumber(String monthName) {
-        return (Integer)null;
+        int result = 0;
+        for (Map.Entry<Integer, String> entry : month.entrySet()) {
+            if (entry.getValue().contains(monthName)) {
+                result = entry.getKey();
+            }
+        }
+        return result;
     }
 
     /**
@@ -33,7 +48,10 @@ public class MonthConversion {
      * @return true if the monthNumber is in the keySet
      */
     public Boolean isValidNumber(Integer monthNumber) {
-        return null;
+        if (monthNumber > 0 && monthNumber < 13) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -41,14 +59,19 @@ public class MonthConversion {
      * @return true if the monthName is in the valueSet
      */
     public Boolean isValidMonth(String monthName) {
-        return null;
+        return monthName.equals("January") || monthName.equals("February") ||
+                monthName.equals("March") || monthName.equals("April") ||
+                monthName.equals("May") || monthName.equals("June") ||
+                monthName.equals("July") || monthName.equals("August") ||
+                monthName.equals("September") || monthName.equals("October") ||
+                monthName.equals("November") || monthName.equals("December");
     }
 
     /**
      * @return number of entries in this mapping
      */
     public Integer size() {
-        return -1;
+        return month.size();
     }
 
     /**
@@ -56,6 +79,7 @@ public class MonthConversion {
      * @param monthName - name of month
      */
     public void update(Integer monthNumber, String monthName) {
-
+        getName(monthNumber);
+        getNumber(monthName);
     }
 }
